@@ -26,6 +26,7 @@ app.set('utils', utils);
 app.set('auth', require(path.join(BASE_PATH, '/classes/auth')));
 
 // Models
+app.set('User', require(BASE_PATH + '/models/user'));
 
 // Middleware
 app.use(busboy());
