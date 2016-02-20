@@ -4,7 +4,7 @@ var fs = require('fs-extra'),
 	path = require('path');
 
 var defaults = {
-	NAME: 'NOTE API',
+	NAME: 'NOTES API',
 	VERSION: '',
 	URL: 'http://localhost:3000',
 	APP_URL: 'http://localhost:3000/#',
