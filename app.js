@@ -45,6 +45,7 @@ app.use('/' + CONFIG.ASSETS_PATH, express.static(CONFIG.ASSETS_PATH));
 // Routes
 app.use(cors());
 //app.use('/', require(path.join(BASE_PATH, 'routes', 'base')));
+app.use('/users', require(path.join(BASE_PATH, 'routes', 'users')));
 
 // Catch 404 and forward to error handler
 app.use( function(req, res) {
