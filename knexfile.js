@@ -7,7 +7,7 @@ module.exports = {
     connection: {
       database: 'note',
       user:     'root',
-      password: ''
+      password: 'admin1234'
     },
     migrations: {
       tableName: 'knex_migrations'

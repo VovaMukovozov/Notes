@@ -6,7 +6,7 @@
         		connection: {
         			host     : 'localhost',
             			user     : 'root',
-            			password : '',
+            			password : 'admin1234',
             			database : 'note'
         		},
     		dump: '',
