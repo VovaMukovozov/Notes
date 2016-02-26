@@ -11,6 +11,7 @@ var Note = app.get('Note');
 // Controller
 var notes = {
 	list: function(req,res){
+		utils.log(auth.get.id(req));
 		// Fetching all notes
 		new Note()
 				.fetchAll({
@@ -18,7 +19,7 @@ var notes = {
 				})
 				.asCallback( function (err, notes) {
 					if (err) { return utils.res.error(res, { message: 'Could not fetch all notes', reason: err, debug: notes }); }
-					if (_.isEmpty(note)) { return utils.res.not_found(res, { message: 'Could not fetch note' }); }
+					if (_.isEmpty(notes)) { return utils.res.not_found(res, { message: 'Could not fetch note' }); }
 					utils.res.ok(res, notes);
 				});
 	},

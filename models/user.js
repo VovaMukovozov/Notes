@@ -36,7 +36,6 @@ var User = Bookshelf.Model.extend({
     },
     creating: function() {
         this.set('created_at', new Date());
-        this.set('is_active', false);
         this.set('is_email_confirmed', false);
         return true;
     },

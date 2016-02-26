@@ -22,9 +22,6 @@ exports.up = function(knex, Promise) {
         table.string('facebook_id');
         table.string('google_id');
 
-        // Billing provider
-        table.string('stripe_id');
-
         // Permission keys details
         table.boolean('is_active').defaultTo(false).notNull();
 
