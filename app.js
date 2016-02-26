@@ -27,6 +27,7 @@ app.set('auth', require(path.join(BASE_PATH, '/classes/auth')));
 
 // Models
 app.set('User', require(BASE_PATH + '/models/user'));
+app.set('Note',require(BASE_PATH + '/models/note'));
 
 // Middleware
 app.use(busboy());
@@ -46,7 +47,7 @@ app.use('/' + CONFIG.ASSETS_PATH, express.static(CONFIG.ASSETS_PATH));
 app.use(cors());
 //app.use('/', require(path.join(BASE_PATH, 'routes', 'base')));
 app.use('/users', require(path.join(BASE_PATH, 'routes', 'users')));
-
+app.use('/notes', require(path.join(BASE_PATH, 'routes', 'notes')));
 // Catch 404 and forward to error handler
 app.use( function(req, res) {
     app.get('utils').res.error(res, {message: 'Bad Request', reason: 'Incorrect routing', status: 404});
