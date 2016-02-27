@@ -15,7 +15,7 @@ var users = {
 		new User()
 				.fetchAll()
 				.asCallback( function (err, users) {
-					if (err) { return utils.res.error(res, { message: 'Could not fetch all device types', reason: err, debug: user }); }
+					if (err) { return utils.res.error(res, { message: 'Could not fetch user', reason: err, debug: user }); }
 
 					utils.res.ok(res, users);
 				});
