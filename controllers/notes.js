@@ -2,18 +2,19 @@
 
 // Libs
 var utils = app.get('utils'),
-	auth = app.get('auth'),
-	moment = require('moment');
+    auth = app.get('auth'),
+	  moment = require('moment');
 
 // Models
 var Note = app.get('Note');
 
 // Controller
 var notes = {
+	// Fetching all notes
 	list: function(req,res){
-		utils.log(auth.get.id(req));
-		// Fetching all notes
+
 		new Note()
+        .query( {where: { user_id: auth.get.id(req)}})  //		utils.log(auth.get.id(req));
 				.fetchAll({
 					columns: ['id', 'title', 'description', 'importance']
 				})
@@ -22,18 +23,19 @@ var notes = {
 					if (_.isEmpty(notes)) { return utils.res.not_found(res, { message: 'Could not fetch note' }); }
 					utils.res.ok(res, notes);
 				});
+
 	},
 	   //Creating new note
 		 create: function(req,res){
-
 			// validation
 			req.checkBody('title').notEmpty();
 			req.checkBody('description').notEmpty();
+      req.body.user_id = auth.get.id(req);                ///auth.get.id(req);
 			var errors = req.validationErrors(true);
 			if(errors) { return utils.res.error(res, { message: errors})}
 
-			new Note(_.pick(req.body, ['title', 'description', 'importance']))
-				.save()
+			new Note(_.pick(req.body, ['title', 'description', 'importance','user_id']))
+      	.save()
 				.asCallback(function (err, note) {
 					if (err) { return utils.res.error(res, { message: 'Could not create note', reason: err, debug: note }); }
 					utils.res.created(res, note);
@@ -49,6 +51,7 @@ var notes = {
 
 				// Fetching note by id
 		  new Note({id: req.params.id})
+          .query( {where: { user_id: auth.get.id(req)}})
 					.fetch({
 						columns: ['id', 'title', 'description', 'importance']
 					})
@@ -69,6 +72,7 @@ var notes = {
 		var data = _.pick(req.body, ['title', 'description', 'importance']);
 
 		new Note({id: req.params.id})
+        .query( {where: { user_id: auth.get.id(req)}})   // auth.get.id(req)
 				.fetch({require: true})         // set id
 				.asCallback(function (err, note) {
 					if (err) { return utils.res.error(res, { message: 'Could not fetch note', reason: err, debug: note }); }
@@ -90,6 +94,7 @@ var notes = {
 		if(errors) { return utils.res.error(res, { message: errors});}
 
 		new Note({id: req.params.id})
+        .query( {where: { user_id: auth.get.id(req)}})  // auth.get.id(req)
 				.fetch({require: true})         // set id
 				   .asCallback(function (err,note) {
 							if (err) { return utils.res.error(res, { message: 'Could not fetch note', reason: err, debug: note }); }
