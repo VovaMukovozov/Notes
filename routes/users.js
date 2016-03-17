@@ -6,7 +6,7 @@ var express = require('express'),
 	users = require(BASE_PATH + '/controllers/users');
 
 // GET
-// router.get('/',  users.list);
+ router.get('/',  users.list);
 // router.get('/:id',users.single);
 
 // POST
