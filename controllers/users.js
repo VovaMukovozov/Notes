@@ -23,7 +23,6 @@ var users = {
 
 	// Lgin
 	login: function(req, res) {
-
 		// Validation rules
 		req.checkBody('email').notEmpty().isEmail();
 		req.checkBody('password').len(8, 32);
