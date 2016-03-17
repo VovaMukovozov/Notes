@@ -5,9 +5,9 @@ var fs = require('fs-extra'),
 
 var defaults = {
 	NAME: 'NOTES API',
-	VERSION: '',
-	URL: 'http://localhost:3000',
-	APP_URL: 'http://localhost:3000/#',
+	VERSION: '1.1.1',
+	URL: 'http://localhost:8080',
+	APP_URL: 'http://localhost:8080/#',
 
 	DB: {
 		client: 'mysql',
