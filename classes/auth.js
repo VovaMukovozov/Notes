@@ -1,7 +1,7 @@
 'use strict';
 
 // Libs
-var bcrypt = require('bcrypt'),
+var bcrypt = require('bcryptjs'),  // changed crypt m0dule
 	utils = app.get('utils'),
 	jwt = require('jwt-simple'),
 	passport = require('passport');
