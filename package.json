@@ -7,7 +7,7 @@
     "start": "NODE_ENV=development nodemon ./bin/www"
   },
   "dependencies": {
-    "bcrypt": "^0.8.5",
+    "bcryptjs": "^2.3.0",
     "body-parser": "^1.13.3",
     "bookshelf": "^0.8.2",
     "checkit": "^0.5.1",
