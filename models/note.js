@@ -47,7 +47,7 @@ var Note = Bookshelf.Model.extend({
 
     // Formatting data
     format_schema: {
-        id: ['hidden'],
+        id: ['unescape'],
         user_id: ['hidden'],
         title: ['unescape', 'not_null'],
         description: ['unescape', 'not_null'],
