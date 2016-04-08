@@ -35,9 +35,9 @@
 			callbackURL: "http://localhost:3000/api/0.1/users/twitter/callback"
 		},
 		google: {
-			clientID: '1058533247665-kimj1hdauacot7r5ejtsbluh7ae59626.apps.googleusercontent.com',
-			clientSecret: 'uldupyDleLKyhjl4VMXVQIfu',
-			callbackURL: 'http://localhost:3000/api/0.1/users/google/callback'
+			clientID: '646872434021-jdv7vj2ihfvn3gki58cdcv1283vbedho.apps.googleusercontent.com',
+			clientSecret: 'YarN2XF9x8N5HGPuDg-DKigj',
+			callbackURL: 'http://localhost:8080/auth/google/callback'
 		}
 	},
 

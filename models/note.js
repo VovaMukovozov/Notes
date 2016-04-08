@@ -1,7 +1,7 @@
-'use strict';
+  'use strict';
 
-// Libs
-var utils = app.get('utils'),
+  // Libs
+  var utils = app.get('utils'),
     checkit = require('checkit'),
     fs = require('fs-extra'),
     moment = require('moment'),
@@ -47,7 +47,7 @@ var Note = Bookshelf.Model.extend({
 
     // Formatting data
     format_schema: {
-        id: ['hidden'],
+        id: ['unescape'],
         user_id: ['hidden'],
         title: ['unescape', 'not_null'],
         description: ['unescape', 'not_null'],
