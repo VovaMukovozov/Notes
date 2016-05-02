@@ -216,7 +216,7 @@ var auth = {
 			data[providerKey] = profile.id;
 
 			_auth.query()
-			.select('id', 'is_active', 'is_key_admin')
+			.select('id', 'is_active')
 			.where(data)
 			.then( function(result) {
 				if (!result.length) { return auth.social.register(token, profile, providerKey, callback); }
@@ -229,11 +229,11 @@ var auth = {
 				_auth.update_last_login(user.id);
 				_auth.password.clear_token(user.id);
 
-				var is_admin = (user.is_key_admin === 1),
-					user_data = {
+			//	var is_admin = (user.is_key_admin === 1),
+				var 	user_data = {
 						id: user.id,
 						keys: {
-							admin: is_admin
+						//	admin: is_admin
 						}
 					}
 
@@ -263,9 +263,6 @@ var auth = {
 				email: '',
 				is_email_confirmed: profile._json.verified || false,
 				is_active: true,
-				plan: 't',
-				company: '',
-				industry: '',
 				password: '',
 				last_login: new Date(),
 				created_at: new Date()
@@ -280,21 +277,22 @@ var auth = {
 				data.last_name = profile.displayName.split(' ')[1];
 				data.email = profile.user.local.email;
 			} else {
-				data.first_name = profile.first_name;
-				data.last_name = profile.last_name;
+				data.first_name = profile.name.givenName;
+				data.last_name =  profile.name.familyName;
+				data.email =   profile.emails[0].value;
 			}
 
 			data[providerKey] = profile.id;
 
 			// Creating a stripe customer
-			var stripe = require('stripe')(CONFIG.STRIPE.KEY);
-			stripe.customers.create({
-				description: data.first_name + ' ' + data.last_name,
-				email: data.email
-			}, function(err, customer) {
-				if (err) { return callback(JSON.stringify({ sucsess: false, message: 'Could not register user'}), null); }
+			// var stripe = require('stripe')(CONFIG.STRIPE.KEY);
+			// stripe.customers.create({
+			// 	description: data.first_name + ' ' + data.last_name,
+			// 	email: data.email
+	//		}, function(err, customer) {
+	//			if (err) { return callback(JSON.stringify({ sucsess: false, message: 'Could not register user'}), null); }
 
-				data.stripe_id = customer.id;
+	//			data.stripe_id = customer.id;
 
 				// Register user
 				_auth.query()
@@ -316,7 +314,7 @@ var auth = {
 				})
 				.catch(callback);
 
-			});
+//			});
 		},
 		enter: function(req, res) {
 			utils.res.ok(res, {

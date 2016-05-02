@@ -19,11 +19,13 @@ var TwitterStrategy = require('passport-twitter').Strategy,
 router.post('/', users.registration);
 router.post('/login', users.login);
 
-
 // Routers for Google-AUTH
-
-router.get('/auth/google',passport.authenticate('google', { scope :  'email'}));
-router.get('/auth/google/callback',
+router.get('/auth/google',passport.authenticate('google', { scope:
+  	[ 'https://www.googleapis.com/auth/plus.login',
+  	  'https://www.googleapis.com/auth/plus.profile.emails.read',
+		  'https://www.googleapis.com/auth/calendar'
+	]}));
+router.get('/oauth2callback',
             passport.authenticate('google', {
                     successRedirect : 'http://localhost:3000/#/',
                     failureRedirect : 'http://localhost:3000/#/login'
@@ -78,14 +80,22 @@ router.get('/auth/google/callback',
 
 						// Google strategy
 						passport.use(new GoogleStrategy({
+
 								clientID: CONFIG.AUTH.google.clientID,
 								clientSecret: CONFIG.AUTH.google.clientSecret,
 								callbackURL: CONFIG.AUTH.google.callbackURL
 							},
+
 							function(accessToken, refreshToken, profile, callback) {
-								auth.social.validate(accessToken, profile, 'google_id', callback);
-							}
-						));
+												console.log(accessToken);
+						        		auth.social.validate(accessToken, profile, 'google_id', callback);
+
+								      //       console.log(profile);
+
+      								//				auth.social.validate(accessToken, profile, 'google_id', callback);
+
+										}
+								));
 
 
 module.exports = router;

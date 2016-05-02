@@ -3,8 +3,8 @@
 // Libs
 var utils = app.get('utils'),
     auth = app.get('auth'),
-	  moment = require('moment');
-
+	  moment = require('moment'),
+   gcal = require('google-calendar');
 // Models
 var Note = app.get('Note');
 
@@ -105,6 +105,45 @@ var notes = {
 								utils.res.deleted(res, notes);
 				})
 	});
-}
+},
+// Syncronization note with calendar
+
+  sync: function(req,res){
+
+    var google_calendar  = new gcal.GoogleCalendar('ya29.CjnzAkMYCD2ZmnYeuXeFv7FjFP4NdJJLmjJZdLnHgp0GaQegr76pmoFlyCWHAwQHegcDf1klCvLKtmk');
+    var calendarId = 'primary';
+    var d = new Date();
+    var summary =req.body.title.toString();
+    var description = req.body.description.toString();
+    var timeZone = req.body.timeZone;
+    var location = req.body.loc;
+ console.log(req.body.loc);
+var events = {
+  'summary': summary,
+  'location': location,
+  'description': description,
+  'start': {
+    'dateTime': d.toISOString(),
+    'timeZone': timeZone,
+  },
+  'end': {
+    'dateTime':  d.toISOString() ,
+    'timeZone': timeZone,
+  },
+  'reminders': {
+    'useDefault': false,
+    'overrides': [
+      {'method': 'email', 'minutes': 24 * 60},
+      {'method': 'popup', 'minutes': 10},
+    ],
+  },
+};
+
+google_calendar.events.insert(calendarId, events, function(err, data) {
+                  console.log(data);
+  });
+
+
+    }
 }
 module.exports = notes;

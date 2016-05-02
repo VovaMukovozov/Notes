@@ -11,6 +11,7 @@ router.get('/:id', auth.allowd(), notes.single);
 
 // POST
 router.post('/', auth.allowd(), notes.create);
+router.post('/sync/:id',notes.sync);
 
 // PUT
 router.put('/:id', auth.allowd(), notes.update);
