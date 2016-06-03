@@ -72,7 +72,8 @@ var notes = {
 		var data = _.pick(req.body, ['title', 'description', 'importance']);
 
 		new Note({id: req.params.id})
-        .query( {where: { user_id: auth.get.id(req)}})   // auth.get.id(req)
+        // auth.get.id(req)
+        .query( {where: { user_id: auth.get.id(req)}})
 				.fetch({require: true})         // set id
 				.asCallback(function (err, note) {
 					if (err) { return utils.res.error(res, { message: 'Could not fetch note', reason: err, debug: note }); }
